@@ -37,11 +37,11 @@ const ProfileSetting = () => {
   };
 
   const handleImageChange = async (event) => {
-    setIsLoading(true);
+    
     const token = Cookies.get("authToken");
     const file = event.target.files[0];
     if (!file) return;
-
+     setIsLoading(true);
     const formData = new FormData();
     formData.append("profileImg", file);
 
@@ -63,6 +63,7 @@ const ProfileSetting = () => {
 
       const updatedData = await response.json();
       setUserData(updatedData.data);
+      Cookies.set("profileImg",updatedData.data.profileImg);
       toast.success("your profile image changed successfully");
     } catch (err) {
       toast.error("error");
