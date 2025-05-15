@@ -1,0 +1,86 @@
+const VehicleMakes = [
+    {
+        id:1,
+        name:'Volvo'
+    },
+    {
+        id:2,
+        name:'Mercedes'
+    },
+    {
+        id:3,
+        name:'Scania'
+    },
+    {
+        id:4,
+        name:'MAN'
+    }
+];
+const Pricing = [
+    {
+        id:1,
+        amount:'1000'
+    },
+    {
+        id:2,
+        amount:'2000'
+    },
+    {
+        id:3,
+        amount:'5023'
+    },
+    {
+        id:4,
+        amount:'5953'
+    }
+];
+const Category = [
+    {
+        id:1,
+        name:'Pickup',
+        icon:'./pickup-truck.png'
+    },
+    {
+        id:2,
+        name:'Van',
+        icon:'./truck.png'
+    },
+    {
+        id:3,
+        name:'Semi Truck',
+        icon:'./car.png'
+    },
+    {
+        id:4,
+        name:'Dump Track',
+        icon:'./dump-truck.png'
+    },
+    {
+        id:5,
+        name:'Refrigerated',
+        icon:'./refrigerated-truck.png'
+    },
+    {
+        id:6,
+        name:'Tanker-T',
+        icon:'./tanker-truck.png'
+    },
+    {
+        id:7,
+        name:'Bus',
+        icon:'./bus.png'
+    },
+    {
+        id:8,
+        name:'Trailer',
+        icon:'./trailer.png'
+    },
+    {
+        id:9,
+        name:'Cargo',
+        icon:'./cargo.png'
+    },
+]
+export default{
+    VehicleMakes,Pricing,Category
+}

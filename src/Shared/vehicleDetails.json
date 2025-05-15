@@ -1,0 +1,202 @@
+{
+  "vehicleDetails": [
+    {
+      "label": "Listing Title",
+      "name": "title",
+      "fieldType": "text",
+      "required": true,
+      "column": 2,
+      "icon": "FaClipboardList"
+    },
+    {
+      "label": "Tagline",
+      "name": "tagline",
+      "fieldType": "text",
+      "column": 2,
+      "icon": "FaTag"
+    },
+    {
+      "label": "Price Per Day",
+      "name": "pricePerDay",
+      "fieldType": "text",
+      "required": true,
+      "column": 1,
+      "icon": "FaMoneyBillAlt"
+    },
+    {
+      "label": "Category",
+      "name": "category",
+      "fieldType": "dropdown",
+      "required": true,
+      "column": 1,
+      "icon": "FaCar"
+    },
+    {
+      "label": "Condition",
+      "name": "condition",
+      "fieldType": "dropdown",
+      "required": true,
+      "options": [
+        { "label": "New", "value": "new" },
+        { "label": "Used", "value": "used" }
+      ],
+      "column": 1,
+      "icon": "FaCheckCircle"
+    },
+
+    {
+      "label": "Mark",
+      "name": "mark",
+      "fieldType": "dropdown",
+      "required": true,
+      "column": 1,
+      "icon": "FaIndustry"
+    },
+    {
+      "label": "Model",
+      "name": "model",
+      "fieldType": "text",
+      "required": true,
+      "column": 1,
+      "icon": "FaCarSide"
+    },
+    {
+      "label": "Year",
+      "name": "year",
+      "fieldType": "number",
+      "required": true,
+      "column": 1,
+      "icon": "FaCalendarAlt"
+    },
+    {
+      "label":"Capcity" ,
+      "name":"capacity",  
+      "required": true,
+      "fieldType":"number",
+      "column": 1,
+      "icon":"FaUsers"
+    },
+    {
+      "label":"location" ,
+      "name":"location",
+      "required": true,
+      "fieldType":"text",
+      "column": 1,
+      "icon":"FaMapMarkerAlt"
+    },
+    {
+      "label": "Drive Type",
+      "name": "driveType",
+      "fieldType": "dropdown",
+      "options": [
+        { "label": "FWD", "value": "FWD" },
+        { "label": "RWD", "value": "RWD" },
+        { "label": "AWD", "value": "AWD" },
+        { "label": "4WD", "value": "4WD" }
+      ],
+      "required": true,
+      "column": 1,
+      "icon": "FaRoad"
+    },
+    {
+      "label": "Transmission",
+      "name": "transmission",
+      "fieldType": "dropdown",
+      "options": [
+        { "label": "Automatic", "value": "automatic" },
+        { "label": "Manual", "value": "manual" }
+      ],
+      "required": true,
+      "column": 1,
+      "icon": "FaCogs"
+    },
+    {
+      "label": "Fuel Type",
+      "name": "fuelType",
+      "fieldType": "dropdown",
+      "options": [
+        { "label": "Petrol", "value": "petrol" },
+        { "label": "Diesel", "value": "diesel" },
+        { "label": "Electric", "value": "electric" },
+        { "label": "Hybrid", "value": "hybrid" }
+      ],
+      "required": true,
+      "column": 1,
+      "icon": "FaGasPump"
+    },
+    {
+      "label": "Mileage",
+      "name": "mileage",
+      "fieldType": "number",
+      "required": true,
+      "column": 1,
+      "icon": "FaTachometerAlt"
+    },
+    {
+      "label": "Engine Size",
+      "name": "engineSize",
+      "fieldType": "text",
+      "column": 1,
+      "icon": "FaWrench"
+    },
+    {
+      "label": "Cylinder",
+      "name": "cylinder",
+      "fieldType": "number",
+      "column": 1,
+      "icon": "FaCircle"
+    },
+    {
+      "label": "Color",
+      "name": "color",
+      "fieldType": "dropdown",
+      "required": true,
+      "options": [
+        { "label": "Red", "value": "red" },
+        { "label": "Blue", "value": "blue" },
+        { "label": "Green", "value": "green" },
+        { "label": "Black", "value": "black" },
+        { "label": "White", "value": "white" },
+        { "label": "Silver", "value": "silver" },
+        { "label": "Gray", "value": "gray" },
+        { "label": "Yellow", "value": "yellow" }
+      ],
+      "column": 2,
+      "icon": "FaPalette"
+    },
+    {
+      "label": "Door",
+      "name": "doorCount",
+      "fieldType": "number",
+      "required": true,
+      "column": 1,
+      "icon": "FaDoorClosed"
+    },
+    {
+      "label": "VIN",
+      "name": "vin",
+      "fieldType": "text",
+      "column": 1,
+      "icon": "FaIdCard"
+    },
+    {
+      "label": "Offer Type",
+      "name": "offerType",
+      "fieldType": "dropdown",
+      "options": [
+        { "label": "Rent", "value": "rent" },
+        { "label": "Sale", "value": "sale" }
+      ],
+      "column": 2,
+      "icon": "FaTags"
+    },
+    {
+      "label": "Listing Description",
+      "name": "description",
+      "fieldType": "textarea",
+      "required": true,
+      "column": 2,
+      "icon": "FaFileAlt"
+    }
+  ]
+}
