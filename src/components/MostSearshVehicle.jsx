@@ -38,7 +38,7 @@ function MostSearshVehicle({ loading, vehicles }) {
     );
   if (error) return <p>Error: {error}</p>;
   return (
-    <div className="mx-24">
+    <div className="mx-4">
       <h2 className="font-bold text-3xl text-center mt-16 mb-2">
         Most Search Vehicle
       </h2>

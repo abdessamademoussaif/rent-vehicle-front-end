@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 function VehicleItem({vehicle}) {
   return (
     <Link to={'/listing-details/'+vehicle._id}> 
-        <div className="relative bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
+        <div className="relative bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl sm:w-full" >
             {vehicle.condition === 'new' && <h2 className="absolute m-2 px-2 bg-green-500 rounded-full text-sm text-white">New</h2>}
             {/* show avarage rating */}
             {vehicle?.ratingsAverage && <h2 className="absolute m-2 px-2 bg-yellow-500 rounded-full text-sm text-white right-0">{vehicle?.ratingsAverage} ⭐</h2>}
