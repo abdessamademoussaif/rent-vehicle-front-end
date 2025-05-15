@@ -4,8 +4,7 @@ import Header from "./components/Header";
 import DashboardStats from "./components/DashboardStats";
 import UserTable from "./components/UserTable";
 import VehicleTable from "./components/VehicleTable";
-import CategoryMarkManager from "./components/CategoryMarkManager";
-import Sidebar from "./components/Sidebar";
+import Sidebar from "./components/SideBar";
 import CategoryGrid from "./components/categoryGrid";
 import MarkGrid from "./components/MarkGrid";
 
