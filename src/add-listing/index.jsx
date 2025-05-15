@@ -1,7 +1,7 @@
 import Header from "@/components/Header";
 import { React, useState, useEffect } from "react";
 import vehicleDetails from "./../Shared/vehicleDetails.json";
-import InputField from "./components/inputField";
+import InputField from "./components/InputField";
 import DropdownField from "./components/DropdownField";
 import TextAreaField from "./components/TextAreaField";
 import { Separator } from "@/components/ui/separator";
@@ -50,9 +50,12 @@ function AddListing() {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/categories`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/categories`,
+        {
+          method: "GET",
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -65,9 +68,12 @@ function AddListing() {
 
   const fetchMarks = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/marks`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/marks`,
+        {
+          method: "GET",
+        }
+      );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -82,7 +88,7 @@ function AddListing() {
     try {
       const form = new FormData();
       form.append("owner", Cookies.get("userId"));
-    
+
       for (const key in formData) {
         if (Array.isArray(formData[key])) {
           formData[key].forEach((item) => form.append(key, item));
@@ -92,14 +98,17 @@ function AddListing() {
       }
       form.append("imageCover", imagesFiles[0]);
 
-      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/vehicles`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          Authorization: `Bearer ${Cookies.get("authToken")}`,
-        },
-        body: form,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/vehicles`,
+        {
+          method: "POST",
+          credentials: "include",
+          headers: {
+            Authorization: `Bearer ${Cookies.get("authToken")}`,
+          },
+          body: form,
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -210,12 +219,16 @@ function AddListing() {
 
       {isLoading && (
         <div className="fixed inset-0 bg-gray-200 bg-opacity-50 flex justify-center items-center z-50">
-        <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-800"></div>
-        <img src="/vite.svg" className="rounded-full h-28 w-28 z-10" alt="Loading..." />
-      </div>
+          <div className="absolute animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-blue-800"></div>
+          <img
+            src="/vite.svg"
+            className="rounded-full h-28 w-28 z-10"
+            alt="Loading..."
+          />
+        </div>
       )}
 
-      {/* end is loading  */} 
+      {/* end is loading  */}
       <div className="mt-[100px] px-10 md:px-20 my-10">
         <h2 className="font-bold text-4xl">Add New Vehicle</h2>
         <form className="p-10 border rounded-xl mt-10">
