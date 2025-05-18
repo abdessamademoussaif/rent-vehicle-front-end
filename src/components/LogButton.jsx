@@ -6,22 +6,25 @@ import RegisterModal from "./RegisterModal";
 import ForgotPasswordRequestModal from "./ForgotPasswordRequestModal";
 import VerifyResetCodeModal from "./VerifyResetCodeModal";
 import ResetPasswordModal from "./ResetPasswordModal";
+import { useNavigate } from "react-router-dom";
 
-const LogButton = ({ setIsAuthenticated }) => {
+const LogButton = ({ setIsAuthenticated , toHome}) => {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = useState(false);
   const [isForgotPasswordOpen, setIsForgotPasswordOpen] = useState(false);
   const [isVerifyResetCodeOpen, setIsVerifyResetCodeOpen] = useState(false);
   const [isResetPasswordOpen, setIsResetPasswordOpen] = useState(false);
+  const navigate = useNavigate();
+  
+  
 
   const [loginData, setLoginData] = useState({ email: "", password: "" });
   const [registerData, setRegisterData] = useState({ name: "", email: "", phone: "", password: "" });
   const [forgotPasswordEmail, setForgotPasswordEmail] = useState("");
-
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
   const [forgotPasswordError, setForgotPasswordError] = useState("");
-
+  const [loading , setLoading] = useState(false);
   const switchToForgotPassword = () => {
     setIsLoginOpen(false);  
     setIsForgotPasswordOpen(true);
@@ -42,6 +45,7 @@ const LogButton = ({ setIsAuthenticated }) => {
     Cookies.set("role", role, { expires: 20, secure: true, sameSite: "Strict", path: "/" });
   };
   const handleLoginSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     try {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/login`, {
@@ -56,16 +60,20 @@ const LogButton = ({ setIsAuthenticated }) => {
         setIsLoginOpen(false);
         setLoginError("");
         setIsAuthenticated(true);
+        toHome();
       } else {
         setLoginError(data.message || "Login failed.");
       }
     } catch (err) {
       setLoginError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleRegisterSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/signup`, {
         method: "POST",
@@ -78,15 +86,19 @@ const LogButton = ({ setIsAuthenticated }) => {
         setIsRegisterOpen(false);
         setRegisterError("");
         setIsAuthenticated(true);
+        toHome();
       } else {
         setRegisterError(data.message || "Registration failed.");
       }
     } catch (err) {
       setRegisterError("An unexpected error occurred.");
+    }finally{
+      setLoading(false);
     }
   };
 
   const handleForgotPasswordSubmit = async (email) => {
+    setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/forgotPassword`, {
         method: "POST",
@@ -104,10 +116,13 @@ const LogButton = ({ setIsAuthenticated }) => {
       }
     } catch (err) {
       setForgotPasswordError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleVerifyResetCodeSubmit = async (code) => {
+    setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/verifyResetCode`, {
         method: "POST",
@@ -124,10 +139,13 @@ const LogButton = ({ setIsAuthenticated }) => {
       }
     } catch (err) {
       setForgotPasswordError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleResetPasswordSubmit = async (password) => {
+    setLoading(true);
     try {
       const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/v1/auth/resetPassword`, {
         method: "PUT",
@@ -141,11 +159,14 @@ const LogButton = ({ setIsAuthenticated }) => {
         setIsResetPasswordOpen(false);
         setIsLoginOpen(true);
         setIsAuthenticated(true);
+        toHome();
       } else {
         setForgotPasswordError(data.message || "Password reset failed.");
       }
     } catch (err) {
       setForgotPasswordError("An unexpected error occurred.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -162,6 +183,7 @@ const LogButton = ({ setIsAuthenticated }) => {
         switchToRegister={() => { setIsLoginOpen(false); setIsRegisterOpen(true); }}
         error={loginError}
         switchToForgotPassword={switchToForgotPassword}  
+        loading={loading}
       />
       )}
 
@@ -173,6 +195,7 @@ const LogButton = ({ setIsAuthenticated }) => {
           onClose={() => setIsRegisterOpen(false)}
           switchToLogin={() => { setIsRegisterOpen(false); setIsLoginOpen(true); }}
           error={registerError}
+          loading={loading}
         />
       )}
 
@@ -181,6 +204,7 @@ const LogButton = ({ setIsAuthenticated }) => {
           onSubmit={handleForgotPasswordSubmit}
           onClose={() => setIsForgotPasswordOpen(false)}
           error={forgotPasswordError}
+          loading={loading}
         />
       )}
 
@@ -189,6 +213,7 @@ const LogButton = ({ setIsAuthenticated }) => {
           onSubmit={handleVerifyResetCodeSubmit}
           onClose={() => setIsVerifyResetCodeOpen(false)}
           error={forgotPasswordError}
+          loading={loading}
         />
       )}
 
@@ -197,6 +222,7 @@ const LogButton = ({ setIsAuthenticated }) => {
           onSubmit={handleResetPasswordSubmit}
           onClose={() => setIsResetPasswordOpen(false)}
           error={forgotPasswordError}
+          loading={loading}
         />
       )}
     </div>

@@ -107,7 +107,7 @@ function Search({ setVehicles, onClose }) {
 
       <Select onValueChange={setMaxPrice}>
         <SelectTrigger className=" outline-none md:border-none w-full shadow-none">
-          <SelectValue placeholder="Pricing" />
+          <SelectValue placeholder="Max Price" />
         </SelectTrigger>
         <SelectContent className="bg-white select-content">
           {Data.Pricing.map((price, index) => (

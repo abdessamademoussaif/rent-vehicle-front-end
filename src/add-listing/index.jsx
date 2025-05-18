@@ -96,7 +96,13 @@ function AddListing() {
           form.append(key, formData[key]);
         }
       }
-      form.append("imageCover", imagesFiles[0]);
+
+      if (imagesFiles.length > 0) {
+        form.append("imageCover", imagesFiles[0]);
+        for (let i = 1; i < imagesFiles.length; i++) {
+          form.append("images", imagesFiles[i]);
+        }
+      }
 
       const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/api/v1/vehicles`,

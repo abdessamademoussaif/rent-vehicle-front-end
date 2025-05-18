@@ -1,9 +1,8 @@
-import React, { useRef, useState ,  } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "emailjs-com";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Cookies from "js-cookie";
-
 
 function Contact() {
   const form = useRef();
@@ -12,11 +11,13 @@ function Contact() {
   const [isAuthenticated, setIsAuthenticated] = useState(
     !!Cookies.get("authToken")
   );
+  const [loading, setLoading] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
     setSuccess(false);
     setError(false);
+    setLoading(true);
 
     emailjs
       .sendForm(
@@ -34,7 +35,8 @@ function Contact() {
           console.error(err);
           setError(true);
         }
-      );
+      )
+      .finally(() => setLoading(false));
   };
 
   return (
@@ -103,7 +105,7 @@ function Contact() {
               type="submit"
               className="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition duration-300"
             >
-              Send Message
+              {loading ? "Sending..." : "Send Message"}
             </button>
 
             {success && (

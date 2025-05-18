@@ -147,8 +147,6 @@ const UserReservations = () => {
     doc.save("invoice.pdf");
   };
 
-  if (loading) return <div className="p-6">Loading...</div>;
-
   return (
     <>
       <Header
@@ -156,70 +154,140 @@ const UserReservations = () => {
         setIsAuthenticated={setIsAuthenticated}
       />
 
-      <div className="p-6 mt-20 max-w-5xl mx-auto">
-        <h2 className="text-3xl font-bold mb-6">My Reservations</h2>
+      <div className="px-4 py-8 mt-24 max-w-6xl mx-auto">
+        <h2 className="text-4xl font-bold mb-8 text-gray-800">
+          My Reservations
+        </h2>
 
-        {reservations.length === 0 ? (
-          <p>No reservations found.</p>
+        {loading ? (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/70 backdrop-blur">
+            <div className="flex flex-col items-center space-y-4">
+              <svg
+                className="w-8 h-8 text-blue-500 animate-spin"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                />
+              </svg>
+              <span className="text-gray-600 text-lg font-medium">
+                Loading, please wait...
+              </span>
+            </div>
+          </div>
+        ) : reservations.length === 0 ? (
+          <div className="flex flex-col items-center justify-center p-8 bg-white border border-gray-200 rounded-2xl shadow-sm text-center">
+            <svg
+              className="w-12 h-12 text-gray-400 mb-3"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15.75 9V5.25H8.25v3.75M8.25 18v-.75A2.25 2.25 0 0110.5 15h3a2.25 2.25 0 012.25-2.25v-.75h-9V5.25M6.75 9V5.25l1.5 9a2.25 2.25 0 002.25 2.25h6a2.25 2.25 0 002.25-2.25L17.25 9"
+              />
+            </svg>
+            <h4 className="text-gray-700 text-xl font-semibold">
+              No reservations found
+            </h4>
+            <p className="text-gray-500 mt-2">
+              You haven’t booked anything yet. Start exploring vehicles!
+            </p>
+          </div>
         ) : (
           <div className="space-y-6">
             {reservations.map((res) => (
               <div
                 key={res._id}
-                className="p-5 border rounded-[5px] shadow hover:shadow-md transition"
+                className="relative p-5 border rounded-xl shadow hover:shadow-md transition bg-white"
               >
-                <div className="flex flex-col md:flex-row justify-between gap-4">
-                  <div>
-                    <h3 className="text-xl font-semibold">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                  <div className="space-y-1">
+                    <h3 className="text-2xl font-semibold text-gray-800">
                       {res.vehicle?.title}
                     </h3>
-                    <p className="text-sm text-gray-600">
-                      From {new Date(res.startDate).toLocaleDateString()} to{" "}
+                    <p className="text-sm text-gray-500">
+                      {new Date(res.startDate).toLocaleDateString()} -{" "}
                       {new Date(res.endDate).toLocaleDateString()}
                     </p>
-                    <p className="text-sm">Total: ${res.totalPrice}</p>
-                    <p className="text-sm">
-                      Status: <span className="font-medium">{res.status}</span>
+                    <p className="text-sm text-gray-600">
+                      Total:{" "}
+                      <span className="font-medium">{res.totalPrice} DH</span>
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Status:{" "}
+                      <span
+                        className={`font-semibold ${
+                          res.status === "cancelled"
+                            ? "text-red-500"
+                            : res.status === "confirmed"
+                            ? "text-green-500"
+                            : "text-yellow-500"
+                        }`}
+                      >
+                        {res.status}
+                      </span>
                     </p>
                   </div>
 
-                  <div className="flex gap-3 items-center">
-                    {res.status === "pending" || res.status === "confirmed" ? (
+                  <div className="flex flex-wrap gap-3">
+                    {(res.status === "pending" ||
+                      res.status === "confirmed") && (
                       <button
-                        onClick={() =>{ setIsModalOpen(true);setReservationIdToCancel(res._id)}}
-                        className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          setReservationIdToCancel(res._id);
+                        }}
+                        className="px-4 py-2 rounded-full bg-red-500 text-white text-sm hover:bg-red-600 transition"
                       >
                         Cancel
                       </button>
-                    ) : null}
-
+                    )}
                     <button
                       onClick={() => downloadInvoice(res)}
-                      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                      className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm hover:bg-blue-700 transition"
                     >
                       Download Invoice
                     </button>
-
                     <Link
                       to={`/reservations/${res._id}`}
-                      className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
+                      className="px-4 py-2 rounded-full bg-gray-700 text-white text-sm hover:bg-gray-800 transition"
                     >
                       Details
                     </Link>
                   </div>
                 </div>
+                <div className="absolute bottom-3 right-5 text-xs text-gray-400">
+                  Created: {new Date(res.createdAt).toLocaleDateString()}
+                </div>
               </div>
             ))}
           </div>
         )}
+
         <ConfirmModal
           open={isModalOpen}
-          title={"are you sure you want to cancel this reservation"}
+          title="Are you sure you want to cancel this reservation?"
           onConfirm={() => handleCancel(reservationIdToCancel)}
           onCancel={() => setIsModalOpen(false)}
         />
       </div>
-      <Footer/>
+
+      <Footer />
     </>
   );
 };

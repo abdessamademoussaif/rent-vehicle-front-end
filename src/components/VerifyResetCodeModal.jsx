@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 
-const VerifyResetCodeModal = ({ onClose, onSubmit, error }) => {
+const VerifyResetCodeModal = ({ onClose, onSubmit, error , loading }) => {
   const [resetCode, setResetCode] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => setResetCode(e.target.value);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
     await onSubmit(resetCode);  
-    setIsLoading(false);
   };
 
   return (
@@ -33,9 +30,9 @@ const VerifyResetCodeModal = ({ onClose, onSubmit, error }) => {
           <button
             type="submit"
             className="w-full bg-blue-700 text-white py-2 rounded-lg"
-            disabled={isLoading}  
+            disabled={loading}  
           >
-            {isLoading ? "Verifying..." : "Verify Code"}
+            {loading ? "Verifying..." : "Verify Code"}
           </button>
         </form>
       </div>

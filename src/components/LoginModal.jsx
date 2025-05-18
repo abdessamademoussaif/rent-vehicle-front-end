@@ -6,6 +6,7 @@ const LoginModal = ({
   switchToRegister,
   error,
   switchToForgotPassword,
+  loading,
 }) => {
   const handleGoogleLogin = () => {
     window.location.href = `${import.meta.env.VITE_BASE_URL}/api/v1/auth/google`;
@@ -52,7 +53,11 @@ const LoginModal = ({
             type="submit"
             className="w-full bg-blue-700 text-white py-2 rounded-lg"
           >
-            Login
+            {loading ? 
+            'loading...'
+            :
+             'Login'
+          }
           </button>
 
           <div className="relative text-center">

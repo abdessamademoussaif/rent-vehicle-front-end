@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 
-const ResetPasswordModal = ({ onClose, onSubmit, error }) => {
+const ResetPasswordModal = ({ onClose, onSubmit, error , loading }) => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const [passwordError, setPasswordError] = useState("");
 
   const handleChangePassword = (e) => setNewPassword(e.target.value);
@@ -21,9 +20,7 @@ const ResetPasswordModal = ({ onClose, onSubmit, error }) => {
     setPasswordError(validatePassword(newPassword));
 
     if (newPassword === confirmPassword && !passwordError) {
-      setIsLoading(true);
       await onSubmit(newPassword);
-      setIsLoading(false);
     } else if (newPassword !== confirmPassword) {
       alert("Passwords do not match.");
     }
@@ -60,9 +57,9 @@ const ResetPasswordModal = ({ onClose, onSubmit, error }) => {
           <button
             type="submit"
             className="w-full bg-blue-700 text-white py-2 rounded-lg"
-            disabled={isLoading}
+            disabled={loading}
           >
-            {isLoading ? "Resetting..." : "Reset Password"}
+            {loading ? "Resetting..." : "Reset Password"}
           </button>
         </form>
       </div>

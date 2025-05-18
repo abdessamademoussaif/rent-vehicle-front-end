@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import Cookies from "js-cookie";
 import { useEffect, useRef } from "react";
@@ -13,12 +13,17 @@ import NotificationDropdown from "./NotificationDropDown";
 import ModalMenu from "./modalMenu";
 import { Menu } from "lucide-react";
 
-function Header({ isAuthenticated, setIsAuthenticated, setVehicles }) {
+function Header({ isAuthenticated, setIsAuthenticated, setVehicles  }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [showProfileModal, setShowProfileModal] = useState(false);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const toHome = () => {
+    navigate("/");
+  }
 
   const profileModalRef = useRef(null);
   useEffect(() => {
@@ -49,6 +54,7 @@ function Header({ isAuthenticated, setIsAuthenticated, setVehicles }) {
     Cookies.remove("authToken");
     setIsAuthenticated(false);
     setShowProfileModal(false);
+    toHome();
   };
 
   return (
@@ -60,12 +66,21 @@ function Header({ isAuthenticated, setIsAuthenticated, setVehicles }) {
             Home
           </li>
         </Link>
-        <li
-          className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary"
-          onClick={() => setIsSearchOpen(true)}
-        >
-          Search
-        </li>
+        {location.pathname != "/" ? (
+          <li
+            className="font-medium  transition-all  text-gray-400"
+          >
+            Search
+          </li>
+        ) : (
+          <li
+            className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary"
+            onClick={() => setIsSearchOpen(true)}
+          >
+            Search
+          </li>
+        )}
+
         <li
           className="font-medium hover:scale-105 transition-all cursor-pointer hover:text-primary"
           onClick={() => navigate("/about-us")}
@@ -111,6 +126,7 @@ function Header({ isAuthenticated, setIsAuthenticated, setVehicles }) {
             <LogButton
               setIsAuthenticated={setIsAuthenticated}
               switchToForgotPassword={switchToForgotPassword}
+              toHome={toHome}
             />
           )}
         </div>

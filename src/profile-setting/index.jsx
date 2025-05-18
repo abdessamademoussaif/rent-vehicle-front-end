@@ -12,9 +12,11 @@ const ProfileSetting = () => {
   const [userData, setUserData] = useState(null);
   const fileInputRef = useRef(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({});
+  const token = Cookies.get("authToken");
+  const [error, setError] = useState(null);
 
   const fetchUserData = async () => {
-    const token = Cookies.get("authToken");
     try {
       const response = await fetch(
         `${import.meta.env.VITE_BASE_URL}/api/v1/users/getMe`,
@@ -36,12 +38,39 @@ const ProfileSetting = () => {
     }
   };
 
+  const handleFromChange = (event) => {
+    setFormData({ ...formData, [event.target.name]: event.target.value });
+  };
+  const save = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/v1/users/updateMe`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Failed to update profile");
+      }
+      toast.success("Profile updated successfully");
+      fetchUserData();
+    } catch (error) {
+      toast.error("name or phone number invalid ");
+      console.error(error);
+    }
+  };
   const handleImageChange = async (event) => {
-    
     const token = Cookies.get("authToken");
     const file = event.target.files[0];
     if (!file) return;
-     setIsLoading(true);
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("profileImg", file);
 
@@ -63,7 +92,7 @@ const ProfileSetting = () => {
 
       const updatedData = await response.json();
       setUserData(updatedData.data);
-      Cookies.set("profileImg",updatedData.data.profileImg);
+      Cookies.set("profileImg", updatedData.data.profileImg);
       toast.success("your profile image changed successfully");
     } catch (err) {
       toast.error("error");
@@ -160,6 +189,8 @@ const ProfileSetting = () => {
                     <input
                       type="text"
                       id="name"
+                      name="name"
+                      onChange={handleFromChange}
                       className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                       placeholder="Your name"
                       defaultValue={userData?.name}
@@ -177,6 +208,8 @@ const ProfileSetting = () => {
                     <input
                       type="number"
                       id="phone_number"
+                      name="phone"
+                      onChange={handleFromChange}
                       className="bg-indigo-50 border border-indigo-300 text-indigo-900 text-sm rounded-xl focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
                       placeholder="Your phone number"
                       defaultValue={userData?.phone}
@@ -239,6 +272,7 @@ const ProfileSetting = () => {
                 <div className="flex justify-end">
                   <button
                     type="submit"
+                    onClick={save}
                     className="text-white bg-indigo-700 hover:bg-indigo-800 focus:ring-4 focus:outline-none focus:ring-indigo-300 font-medium rounded-xl text-sm w-full sm:w-auto px-5 py-2.5 text-center"
                   >
                     Save

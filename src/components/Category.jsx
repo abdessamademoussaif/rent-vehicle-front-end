@@ -1,4 +1,5 @@
 import Data from "@/Shared/Data";
+import { Loader2 } from "lucide-react";
 import React from "react";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -45,10 +46,7 @@ function Category({ setVehicles }) {
       console.error("Error fetching data:", error);
     }
   };
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
+ if(loading) return null;
   return (
     <div className="mt-20  sm:mt-40">
       <h2 className="font-bold text-3xl text-center mb-6">Browse By Type</h2>

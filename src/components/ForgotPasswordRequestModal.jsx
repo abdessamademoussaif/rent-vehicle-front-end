@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-const ForgotPasswordRequestModal = ({ onSubmit, onClose, error }) => {
+const ForgotPasswordRequestModal = ({ onSubmit, onClose, error , loading }) => {
   const [email, setEmail] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -10,9 +9,7 @@ const ForgotPasswordRequestModal = ({ onSubmit, onClose, error }) => {
       return alert("Please enter a valid email address.");
     }
     
-    setIsLoading(true);
     await onSubmit(email); 
-    setIsLoading(false);
   };
 
   return (
@@ -37,9 +34,9 @@ const ForgotPasswordRequestModal = ({ onSubmit, onClose, error }) => {
           <button
             type="submit"
             className="w-full bg-blue-700 text-white py-2 rounded-lg"
-            disabled={isLoading}  // Disable button when loading
+            disabled={loading}  // Disable button when loading
           >
-            {isLoading ? "Processing..." : "Request Reset"}
+            {loading ? "Processing..." : "Request Reset"}
           </button>
         </form>
         {error && <p className="text-sm text-red-600">{error}</p>}
