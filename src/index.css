@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.animate-spin-once {
+  transition: transform 0.6s ease;
+}
+.animate-spin-once:hover {
+  transform: rotate(360deg);
+}
+

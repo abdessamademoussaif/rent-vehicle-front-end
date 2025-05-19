@@ -147,7 +147,10 @@ const ProfileSetting = () => {
               <div className="flex flex-col items-center space-y-5 sm:flex-row sm:space-y-0">
                 <img
                   className="object-cover w-40 h-40 p-1 rounded-full ring-2 ring-indigo-300"
-                  src={userData?.profileImg}
+                  src={
+                    userData?.profileImg ||
+                    "https://res.cloudinary.com/dsk3xnvyc/image/upload/v1747614291/blank-profile-picture-973460_1280_vgxfnu.png"
+                  }
                   alt="Profile avatar"
                 />
 

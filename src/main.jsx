@@ -16,6 +16,7 @@ import { store } from './redux/store'
 import ReservationDetails from './reservation-details/ReservationDetails'
 import UserReservations from './reservation-details/UserReservations'
 import AboutUs from './aboutUs'
+import UpdateVehicle from './update-vehicle'
 const router = createBrowserRouter([
   {
     path:'/',
@@ -56,6 +57,10 @@ const router = createBrowserRouter([
   {
     path:'/about-us',
     element:<AboutUs/>
+  },
+  {
+    path:'/update-vehicle/:id',
+    element: <UpdateVehicle/>
   }
 ])
 createRoot(document.getElementById('root')).render(

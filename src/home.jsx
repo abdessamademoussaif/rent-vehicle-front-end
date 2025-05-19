@@ -28,7 +28,11 @@ function Home() {
       );
       const data = await res.json();
       Cookies.set("userId", data.data._id);
-      Cookies.set("profileImg", data.data.profileImg);
+      if(data.data.profileImg || data.data.profileImg == ""){
+        Cookies.set("profileImg", data.data.profileImg);
+      }else{
+       Cookies.set("profileImg","https://res.cloudinary.com/dsk3xnvyc/image/upload/v1747614291/blank-profile-picture-973460_1280_vgxfnu.png"); 
+      }
       Cookies.set("role", data.data.role);
     } catch (error) {
       console.log("error on get logged user data:" + error);

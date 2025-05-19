@@ -9,13 +9,6 @@
       "icon": "FaClipboardList"
     },
     {
-      "label": "Tagline",
-      "name": "tagline",
-      "fieldType": "text",
-      "column": 2,
-      "icon": "FaTag"
-    },
-    {
       "label": "Price Per Day",
       "name": "pricePerDay",
       "fieldType": "text",
@@ -184,14 +177,13 @@
       "name": "offerType",
       "fieldType": "dropdown",
       "options": [
-        { "label": "Rent", "value": "rent" },
-        { "label": "Sale", "value": "sale" }
+        { "label": "Rent", "value": "rent" }
       ],
       "column": 2,
       "icon": "FaTags"
     },
     {
-      "label": "Listing Description",
+      "label": "Vehicle Description",
       "name": "description",
       "fieldType": "textarea",
       "required": true,

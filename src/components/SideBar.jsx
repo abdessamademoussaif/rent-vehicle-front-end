@@ -17,8 +17,6 @@ export default function Sidebar({ activeTab, setActiveTab }) {
   ];
 
   const handleLogout = () => {
-    // Add your logout logic here, e.g., clearing cookies
-    console.log("Logout clicked");
   };
 
   return (

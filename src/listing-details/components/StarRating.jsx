@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Cookies from "js-cookie";
 import ReadOnlyStars from "./ReadOnlyStars";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const StarRating = ({ vehicleId, userId }) => {
   const [selectedRating, setSelectedRating] = useState(0);
@@ -44,9 +45,10 @@ const StarRating = ({ vehicleId, userId }) => {
   }, [vehicleId, userId, token]);
 
   const handleSubmit = async () => {
-    console.log(userId);
-    console.log(vehicleId);
-    console.log(selectedRating);
+     if(!token || token==""){
+      toast.error("You are not logged in. Please log in 😑")
+      return;
+     }
     if (selectedRating > 0) {
       try {
         const res = await fetch(
@@ -64,10 +66,10 @@ const StarRating = ({ vehicleId, userId }) => {
             }),
           }
         );
-        console.log(res);
         if (!res.ok) throw new Error("Failed to submit review");
         setHasReview(true);
         setSubmitted(true);
+        toast.success("Your rating has been submitted 🫡.")
       } catch (error) {
         console.error("Error submitting review:", error.message);
       }
@@ -120,7 +122,7 @@ const StarRating = ({ vehicleId, userId }) => {
             <button
               onClick={handleSubmit}
               disabled={submitted}
-              className={`px-4 py-2 rounded-md transition text-white ${
+              className={`px-4 py-2 rounded-[2px] transition text-white ${
                 submitted
                   ? "bg-gray-400 cursor-not-allowed"
                   : "bg-blue-500 hover:bg-blue-600"

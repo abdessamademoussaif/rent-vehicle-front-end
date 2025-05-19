@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import UploadImage from "./components/UploadImage";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function AddListing() {
   const [formData, setFormData] = useState({
@@ -20,7 +21,6 @@ function AddListing() {
     !!Cookies.get("authToken")
   );
   const [imagesFiles, setImagesFiles] = useState([]);
-  const [successMessage, setSuccessMessage] = useState("");
   const [categories, setCategories] = useState([]);
   const [marks, setMarks] = useState([]);
   const [vehicleDetailsList, setVehicleDetailsList] = useState(
@@ -122,19 +122,13 @@ function AddListing() {
 
       const data = await response.json();
       console.log("Vehicle added successfully:", data);
-      setSuccessMessage("Vehicle added successfully!");
+      toast.success("Vehicle added successfully!");
       setFormData({ features: [] });
       setImagesFiles([]);
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
       navigate("/profile");
     } catch (error) {
       console.error("Error adding vehicle:", error);
-      setSuccessMessage("Failed to add vehicle. Please try again.");
-      setTimeout(() => {
-        setSuccessMessage("");
-      }, 3000);
+      toast.error("Failed to add vehicle. Please try again.");
     } finally {
       setIsLoading(false);
     }
@@ -143,7 +137,6 @@ function AddListing() {
     fetchCategories();
     fetchMarks();
   }, []);
-
   const updateOptions = (list, index, options) => {
     return list.map((item, idx) =>
       idx === index ? { ...item, options } : item
@@ -216,11 +209,6 @@ function AddListing() {
         isAuthenticated={isAuthenticated}
         setIsAuthenticated={setIsAuthenticated}
       />
-      {successMessage && (
-        <div className="fixed top-5 left-5 bg-green-500 text-white px-4 py-2 rounded-lg shadow-md z-50">
-          {successMessage}
-        </div>
-      )}
       {/* is loading  */}
 
       {isLoading && (
