@@ -214,7 +214,7 @@ const UserReservations = () => {
             </p>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             {reservations?.map((res) => (
               <div
                 key={res._id}
@@ -249,7 +249,7 @@ const UserReservations = () => {
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-3">
+                  <div className="flex flex-wrap gap-3 mb-4 ms:mb-0">
                     {(res.status === "pending" ||
                       res.status === "confirmed") && (
                       <button
