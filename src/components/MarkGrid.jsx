@@ -157,7 +157,7 @@ const MarkGrid = () => {
         <CardContent>
           {filteredMarks.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredMarks.map((mark) => (
+              {filteredMarks?.map((mark) => (
                 <div
                   key={mark.id}
                   className="rounded-[10px] border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"

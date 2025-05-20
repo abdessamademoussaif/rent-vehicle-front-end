@@ -210,7 +210,7 @@ const UserReservations = () => {
           </div>
         ) : (
           <div className="space-y-6">
-            {reservations.map((res) => (
+            {reservations?.map((res) => (
               <div
                 key={res._id}
                 className="relative p-5 border rounded-xl shadow hover:shadow-md transition bg-white"

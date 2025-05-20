@@ -25,7 +25,7 @@ function UploadImage({ imagesFiles, setImagesFiles }) {
     <div>
       <h2 className="font-medium text-lg my-3">Upload Vehicle Images</h2>
       <div className="grid grid-flow-col md:grid-cols-4 lg:grid-cols-6 gap-5 relative">
-        {selectedFileList.map((image, index) => (
+        {selectedFileList?.map((image, index) => (
           <div key={index} className="relative">
             <IoIosClose
               className="absolute top-0 right-0 m-1 text-[23px] text-white bg-black rounded-full cursor-pointer"

@@ -66,7 +66,7 @@ const NotificationDropdown = ({ isOpen, onClose }) => {
         {notifications.length === 0 ? (
           <li className="p-4 text-gray-500">No notifications</li>
         ) : (
-          notifications.map((notification) => (
+          notifications?.map((notification) => (
             <li
               key={notification._id}
               onClick={() => handleNotificationClick(notification)}

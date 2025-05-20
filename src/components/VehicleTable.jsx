@@ -73,7 +73,7 @@ const VehicleList = () => {
       setVehicles((prev) =>
         action === "delete"
           ? prev.filter((u) => u.id !== vehicle.id)
-          : prev.map((u) =>
+          : prev?.map((u) =>
               u.id === vehicle.id
                 ? { ...u, isActive: action === "activate" }
                 : u
@@ -142,7 +142,7 @@ const VehicleList = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredVehicles.length ? (
-                  filteredVehicles.map((vehicle) => (
+                  filteredVehicles?.map((vehicle) => (
                     <tr key={vehicle.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap flex items-center">
                         <div className="ml-4">

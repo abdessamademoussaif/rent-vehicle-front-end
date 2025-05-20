@@ -68,7 +68,7 @@ function UpdateVehicle() {
   }, []);
 
   const updateOptions = (list, index, options) => {
-    return list.map((item, idx) =>
+    return list?.map((item, idx) =>
       idx === index ? { ...item, options } : item
     );
   };
@@ -79,14 +79,14 @@ function UpdateVehicle() {
       updatedList = updateOptions(
         updatedList,
         2,
-        categories.map((c) => ({ label: c.name, value: c._id }))
+        categories?.map((c) => ({ label: c.name, value: c._id }))
       );
     }
     if (marks.length > 0) {
       updatedList = updateOptions(
         updatedList,
         4,
-        marks.map((m) => ({ label: m.name, value: m._id }))
+        marks?.map((m) => ({ label: m.name, value: m._id }))
       );
     }
     setVehicleDetailsList(updatedList);
@@ -152,7 +152,7 @@ function UpdateVehicle() {
             Choose fields to update
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {vehicleDetailsList.map((item, index) => {
+            {vehicleDetailsList?.map((item, index) => {
               const isActive = activeFields[item.name] || false;
 
               item.required = false;

@@ -77,7 +77,7 @@ const UserList = () => {
       setUsers((prev) =>
         action === "delete"
           ? prev.filter((u) => u.id !== user.id)
-          : prev.map((u) =>
+          : prev?.map((u) =>
               u.id === user.id ? { ...u, isActive: action === "activate" } : u
             )
       );
@@ -100,7 +100,7 @@ const UserList = () => {
       );
 
       setUsers((prev) =>
-        prev.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
+        prev?.map((u) => (u.id === userId ? { ...u, role: newRole } : u))
       );
 
       toast.success("Role updated");
@@ -165,7 +165,7 @@ const UserList = () => {
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
                 {filteredUsers.length ? (
-                  filteredUsers.map((user) => (
+                  filteredUsers?.map((user) => (
                     <tr key={user.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap flex items-center">
                         <img

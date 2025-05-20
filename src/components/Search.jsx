@@ -92,7 +92,7 @@ function Search({ setVehicles, onClose }) {
           <SelectValue placeholder="Manufacturers" />
         </SelectTrigger>
         <SelectContent className="bg-white select-content">
-          {fetchedMarks.map((mark, index) => (
+          {fetchedMarks?.map((mark, index) => (
             <SelectItem key={index} value={mark.id}>
               {mark.name}
             </SelectItem>
@@ -110,7 +110,7 @@ function Search({ setVehicles, onClose }) {
           <SelectValue placeholder="Max Price" />
         </SelectTrigger>
         <SelectContent className="bg-white select-content">
-          {Data.Pricing.map((price, index) => (
+          {Data.Pricing?.map((price, index) => (
             <SelectItem key={index} value={price.amount}>
               {price.amount}<span className='text-[8px] font-bold'>DH</span>
             </SelectItem>

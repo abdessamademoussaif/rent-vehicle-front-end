@@ -22,7 +22,7 @@ function Specification({ Vehicle }) {
     <div className='p-6 sm:p-10 rounded-xl border shadow-md mt-7'>
       <h2 className='font-medium text-2xl'>Specifications</h2>
       {Vehicle ? (
-        VehicleSpecification.map((item, index) => (
+        VehicleSpecification?.map((item, index) => (
           <div
             key={index}
             className="mt-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2"

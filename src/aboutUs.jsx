@@ -73,7 +73,7 @@ const [isAuthenticated, setIsAuthenticated] = useState(
             Meet the Team
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-            {team.map((member, i) => (
+            {team?.map((member, i) => (
               <div
                 key={i}
                 className="bg-white rounded-xl shadow hover:shadow-md transition p-6 text-center"

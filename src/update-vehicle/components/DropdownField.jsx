@@ -19,7 +19,7 @@ function DropdownField({ item, handleInputChange }) {
         </SelectTrigger>
         <SelectContent>
           {item.options &&
-            item.options.map((option) => (
+            item.options?.map((option) => (
               <SelectItem key={option.value} value={option.value}>
                 {option.label}
               </SelectItem>

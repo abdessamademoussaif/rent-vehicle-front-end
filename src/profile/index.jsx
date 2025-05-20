@@ -115,7 +115,7 @@ function Profile() {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-10 md:px-20 my-10">
           {userVehicles.length > 0 ? (
-            userVehicles.map((vehicle) => (
+            userVehicles?.map((vehicle) => (
               <MyVehiclesDetail
                 key={vehicle._id}
                 vehicle={vehicle}

@@ -1,8 +1,9 @@
 import React from "react";
 import VehicleItem from "./VehicleItem";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { searchVehicles } from "@/redux/vehiclesSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { AlertTriangle } from "lucide-react";
 
 function MostSearshVehicle({ loading, vehicles }) {
   const dispatch = useDispatch();
@@ -36,7 +37,17 @@ function MostSearshVehicle({ loading, vehicles }) {
         <span className="sr-only">Loading...</span>
       </div>
     );
-  if (error) return <p>Error: {error}</p>;
+  if (error) {
+  return (
+    <div className="bg-red-100 border mx-3 mb-4 border-red-300 text-red-700 px-4 py-3 rounded-xl flex items-start gap-3 shadow-md mt-4 justify-center ">
+      <AlertTriangle className="w-5 h-5  text-red-600" />
+      <div className="text-sm ">
+        <strong className="font-medium">Something went wrong: </strong>
+        <div className="inline">{error}</div>
+      </div>
+    </div>
+  );
+}
   return (
     <div className="mx-4">
       <h2 className="font-bold text-3xl text-center mt-16 mb-2">
@@ -44,7 +55,7 @@ function MostSearshVehicle({ loading, vehicles }) {
       </h2>
       <div className="h-full flex w-full justify-center items-center dark:bg-gray-800 p-2">
         <div className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4 md:p-2 xl:p-5">
-          {vehicles.data.map((vehicle, index) => (
+          {vehicles?.data?.map((vehicle, index) => (
             <VehicleItem vehicle={vehicle} key={index} />
           ))}
         </div>

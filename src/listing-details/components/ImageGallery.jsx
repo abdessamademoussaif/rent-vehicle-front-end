@@ -37,7 +37,7 @@ function ImageGallery({ imagesUrl = [], cover }) {
 
       {/* Thumbnails */}
       <div className="flex gap-2 overflow-x-auto pb-1">
-        {imageList.map((url, index) => (
+        {imageList?.map((url, index) => (
           <img
             key={index}
             src={url}

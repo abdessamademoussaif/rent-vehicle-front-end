@@ -61,7 +61,7 @@ export default function CategoryMarkManager() {
         <div>
           <h3 className="text-xl font-medium">All Categories</h3>
           <div className="grid grid-cols-2 gap-4 mt-7">
-            {categories.map((cat) => (
+            {categories?.map((cat) => (
               <div
                 key={cat._id}
                 className="border bg-white rounded-xl p-3 flex flex-col items-center hover:shadow-md cursor-pointer"
@@ -82,7 +82,7 @@ export default function CategoryMarkManager() {
         <div>
           <h3 className="text-xl font-medium">All Marks</h3>
           <div className="grid grid-cols-2 gap-4 mt-7">
-            {marks.map((mark) => (
+            {marks?.map((mark) => (
               <div
                 key={mark._id}
                 className="border bg-white rounded-xl p-3 flex flex-col items-center hover:shadow-md cursor-pointer"

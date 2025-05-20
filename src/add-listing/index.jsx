@@ -138,7 +138,7 @@ function AddListing() {
     fetchMarks();
   }, []);
   const updateOptions = (list, index, options) => {
-    return list.map((item, idx) =>
+    return list?.map((item, idx) =>
       idx === index ? { ...item, options } : item
     );
   };
@@ -158,7 +158,7 @@ function AddListing() {
       updatedList = updateOptions(
         updatedList,
         4,
-        marks.map((m) => ({ label: m.name, value: m._id }))
+        marks?.map((m) => ({ label: m.name, value: m._id }))
       );
     }
 
@@ -229,7 +229,7 @@ function AddListing() {
           <div>
             <h2 className="font-medium text-xl mb-6">Vehicle Details</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {vehicleDetailsList.map((item, index) => (
+              {vehicleDetailsList?.map((item, index) => (
                 <div key={index}>
                   <label className="text-sm">
                     {item?.label}
@@ -262,7 +262,7 @@ function AddListing() {
           <div>
             <h2 className="font-medium text-xl my-6">Features List</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-              {features.features.map((item, index) => (
+              {features.features?.map((item, index) => (
                 <div key={index} className="flex gap-2 items-center">
                   <Checkbox
                     onCheckedChange={(checked) =>

@@ -24,7 +24,7 @@ export default function Sidebar({ activeTab, setActiveTab }) {
       {/* Navigation Menu */}
       <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
         <ul className="space-y-2">
-          {navItems.map((item) => (
+          {navItems?.map((item) => (
             <li key={item.value}>
               <button
                 onClick={() => setActiveTab(item.value)}
