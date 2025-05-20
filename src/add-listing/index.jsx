@@ -149,7 +149,7 @@ function AddListing() {
     if (categories.length > 0) {
       updatedList = updateOptions(
         updatedList,
-        3,
+        2,
         categories.map((c) => ({ label: c.name, value: c._id }))
       );
     }
@@ -157,7 +157,7 @@ function AddListing() {
     if (marks.length > 0) {
       updatedList = updateOptions(
         updatedList,
-        5,
+        4,
         marks.map((m) => ({ label: m.name, value: m._id }))
       );
     }

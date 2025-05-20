@@ -78,14 +78,14 @@ function UpdateVehicle() {
     if (categories.length > 0) {
       updatedList = updateOptions(
         updatedList,
-        3,
+        2,
         categories.map((c) => ({ label: c.name, value: c._id }))
       );
     }
     if (marks.length > 0) {
       updatedList = updateOptions(
         updatedList,
-        5,
+        4,
         marks.map((m) => ({ label: m.name, value: m._id }))
       );
     }
@@ -154,9 +154,9 @@ function UpdateVehicle() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {vehicleDetailsList.map((item, index) => {
               const isActive = activeFields[item.name] || false;
-              
-                item.required =false;
-              console.log(item.required)
+
+              item.required = false;
+              console.log(item.required);
               return (
                 <div
                   key={index}
