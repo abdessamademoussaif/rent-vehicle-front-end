@@ -23,6 +23,7 @@ const ReservationDetails = () => {
   const [reservation, setReservation] = useState(null);
   const [loading, setLoading] = useState(true);
   const [status, setStatus] = useState("");
+  const [pdfLoading,setPdfLoading] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(!!token);
 
   useEffect(() => {
@@ -40,7 +41,6 @@ const ReservationDetails = () => {
       setStatus(data.status);
     } catch (err) {
       console.error(err);
-      toast.error("Unable to fetch reservation.");
     } finally {
       setLoading(false);
     }
@@ -67,6 +67,7 @@ const ReservationDetails = () => {
   };
 
   const generatePDF = async () => {
+    setPdfLoading(true);
     const doc = new jsPDF();
     const [logoImg, orgImg] = await Promise.all([loadImage(logo), loadImage(org)]);
 
@@ -111,6 +112,7 @@ const ReservationDetails = () => {
     const qrCode = await QRCode.toDataURL(website);
     doc.addImage(qrCode, "PNG", 160, footerY - 5, 30, 30);
     doc.save("invoice.pdf");
+    setPdfLoading(false);
   };
 
   const loadImage = (src) =>
@@ -220,7 +222,7 @@ const ReservationDetails = () => {
                     className="flex items-center gap-2 bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 transition"
                   >
                     <FileText size={18} />
-                    Download PDF
+                    {pdfLoading ? 'loading...':'Download PDF'}
                   </button>
                 </div>
               </>

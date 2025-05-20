@@ -19,6 +19,8 @@ const UserReservations = () => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [reservationIdToCancel, setReservationIdToCancel] = useState(null);
+  const [pdfLoading, setPdfLoading] = useState(false);
+  const [idClicked, setIdClicked] = useState(null);
   const token = Cookies.get("authToken");
   const userId = Cookies.get("userId");
 
@@ -75,6 +77,8 @@ const UserReservations = () => {
   };
 
   const downloadInvoice = async (reservation) => {
+    setIdClicked(reservation._id);
+    setPdfLoading(true);
     const [logoImg, orgImg] = await Promise.all([
       loadImage(logo),
       loadImage(org),
@@ -145,6 +149,7 @@ const UserReservations = () => {
     doc.addImage(qrCodeDataUrl, "PNG", 160, footerY - 5, 30, 30);
 
     doc.save("invoice.pdf");
+    setPdfLoading(false);
   };
 
   return (
@@ -261,7 +266,7 @@ const UserReservations = () => {
                       onClick={() => downloadInvoice(res)}
                       className="px-4 py-2 rounded-full bg-blue-600 text-white text-sm hover:bg-blue-700 transition"
                     >
-                      Download Invoice
+                      {pdfLoading && res._id==idClicked ? "loading..." : "Download Invoice"}
                     </button>
                     <Link
                       to={`/reservations/${res._id}`}
